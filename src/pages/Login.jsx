@@ -8,8 +8,8 @@ function Login() {
   const [password, setPassword] = useState('');
 
   useEffect(() => {
-    const emailRegex = /.*@[a-z0-9.-]*/i;
-    const passwordRegex = /^[0-9a-zA-Z]{6,}$/i;
+    const emailRegex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
+    const passwordRegex = /^[0-9a-zA-Z]{7,}$/i;
     if (emailRegex.test(email) && passwordRegex.test(password)) {
       setDisable(false);
     } else {

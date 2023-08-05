@@ -8,7 +8,15 @@ function Header() {
   const { pathname } = useLocation();
   const pathName = pathname.substring(1);
 
-  const mealsOrDrinks = pathName === 'meals' || pathName === 'DRINKS';
+  function capitalizeWords(str) {
+    const words = str.split(/[\s-]+/);
+    const capitalizedWords = words
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1));
+    const result = capitalizedWords.join(' ');
+    return result;
+  }
+
+  const mealsOrDrinks = pathName === 'meals' || pathName === 'drinks';
   const search = (
     <Link to="/search">
       <img
@@ -28,14 +36,18 @@ function Header() {
           <span>app</span>
         </div>
         <Link to="/profile">
-          <img src={ pofileIcon } alt="icone do profile" data-testid="profile-top-btn" />
+          <img
+            src={ pofileIcon }
+            alt="icone do profile"
+            data-testid="profile-top-btn"
+          />
         </Link>
         {
           mealsOrDrinks && search
         }
       </nav>
-      <div>
-        { pathName.toUpperCase() }
+      <div data-testid="page-title">
+        { capitalizeWords(pathName) }
       </div>
     </header>
   );
