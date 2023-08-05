@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { addToLocalStorage } from '../services/localStorage';
 
 function Login() {
   const [disable, setDisable] = useState(true);
@@ -14,8 +15,6 @@ function Login() {
     } else {
       setDisable(true);
     }
-
-    console.log(emailRegex.test(email), passwordRegex.test(password));
   }, [email, password]);
 
   const checkValue = ({ target: { name, value } }) => {
@@ -43,12 +42,13 @@ function Login() {
           onChange={ (e) => checkValue(e) }
         />
       </div>
-      <Link to="/">
+      <Link to="/meals">
         <input
           type="button"
           value="Enter"
           data-testid="login-submit-btn"
           disabled={ disable }
+          onClick={ () => addToLocalStorage(email) }
         />
       </Link>
     </div>
